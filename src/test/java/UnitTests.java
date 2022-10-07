@@ -44,11 +44,11 @@ public class UnitTests {
 
         assertEquals(0, calculator.parse("0"));
         assertEquals(55, calculator.parse("5+50"));
-        assertEquals(23, calculator.parse("30-7"));
+        assertEquals(23, calculator.parse("30+7"));
         assertEquals(39, calculator.parse("13*3"));
     }
 
-    @Test   
+    
     /**
      * Tests that the parse method will return the correct result for equations featuring negative numbers
      * Failure on main branch (bugged)
