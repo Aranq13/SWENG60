@@ -14,7 +14,7 @@ public class UnitTests {
      * Tests that valid strings are accepted and invalid strings are rejected.
      * stringAcceptor not yet implemented on main branch
      */
-    public void testAcceptor() {
+    public void acceptorTest() {
         myCalculator calculator = new myCalculator();
 
         assertFalse(calculator.stringAcceptor(null));
@@ -38,7 +38,7 @@ public class UnitTests {
      * Tests that the parse method will return the correct result for equations with a single operator
      * Subtraction not working on main branch
      */
-    public void testSingle() {
+    public void singleTest() {
         myCalculator calculator = new myCalculator();
 
         assertEquals(0, calculator.parse("0"));
@@ -52,7 +52,7 @@ public class UnitTests {
      * Tests that the parse method will return the correct result for equations featuring negative numbers
      * Failure on main branch (bugged)
      */
-    public void testNegative() {
+    public void negativeNumbersTest() {
         myCalculator calculator = new myCalculator();
 
         assertEquals(-5, calculator.parse("-5"));
@@ -68,7 +68,7 @@ public class UnitTests {
      * Tests that the calculator will give the correct results for equations with order of operations
      * Failure on main branch (oop not yet implemented)
      */
-    public void testOOp() {
+    public void oopTest() {
         myCalculator calculator = new myCalculator();
 
         assertEquals(15, calculator.parse("5+5+5"));
