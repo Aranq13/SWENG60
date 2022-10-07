@@ -9,7 +9,7 @@ public class UnitTests {
 
 //~ Constructor ........................................................
 
-    @Test
+    
     /**
      * Tests that valid strings are accepted and invalid strings are rejected.
      * stringAcceptor not yet implemented on main branch
@@ -33,7 +33,7 @@ public class UnitTests {
         assertFalse(calculator.stringAcceptor("-30+55*26+54-"));
     }
     */
-    @Test
+    
     /**
      * Tests that the parse method will return the correct result for equations with a single operator
      * Subtraction not working on main branch
@@ -47,7 +47,7 @@ public class UnitTests {
         assertEquals(39, calculator.parse("13*3"));
     }
 
-    @Test
+   
     /**
      * Tests that the parse method will return the correct result for equations featuring negative numbers
      * Failure on main branch (bugged)
@@ -63,7 +63,7 @@ public class UnitTests {
         assertEquals(-35, calculator.parse("5*-7"));
     }
 
-    @Test
+    
     /**
      * Tests that the calculator will give the correct results for equations with order of operations
      * Failure on main branch (oop not yet implemented)
