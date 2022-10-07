@@ -34,6 +34,7 @@ public class UnitTests {
     }
     */
     
+    @Test
     /**
      * Tests that the parse method will return the correct result for equations with a single operator
      * Subtraction not working on main branch
@@ -47,7 +48,7 @@ public class UnitTests {
         assertEquals(39, calculator.parse("13*3"));
     }
 
-   
+    @Test   
     /**
      * Tests that the parse method will return the correct result for equations featuring negative numbers
      * Failure on main branch (bugged)
