@@ -13,7 +13,7 @@ public class UnitTests {
     /**
      * Tests that valid strings are accepted and invalid strings are rejected.
      * stringAcceptor not yet implemented on main branch
-     */
+     
     public void acceptorTest() {
         myCalculator calculator = new myCalculator();
 
@@ -32,7 +32,7 @@ public class UnitTests {
         assertTrue(calculator.stringAcceptor("-30+55*-26+54"));
         assertFalse(calculator.stringAcceptor("-30+55*26+54-"));
     }
-
+    */
     @Test
     /**
      * Tests that the parse method will return the correct result for equations with a single operator
