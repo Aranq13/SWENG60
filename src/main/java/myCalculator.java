@@ -3,7 +3,7 @@
 import java.util.*;
 
 public class myCalculator {
-    public static int parse(String input) {
+    public static int evaluate(String input) {
         input.replaceAll("\\s+",""); // remove whitespace (if any)
         String operators[] = input.split("[0-9]+"); // find character literals 0-9, match more than one times
         String operands[]= input.split("(?<=\\d)[+*-]"); // +, - or * is followed by digit
@@ -57,10 +57,9 @@ public class myCalculator {
                     if ("exit".equalsIgnoreCase(equation)) {
                         break;
                     }
-                    int answer = parse(equation);
+                    int answer = evaluate(equation);
                 System.out.println("Answer: " + answer);
                 }
             } catch(java.lang.Exception e) {e.printStackTrace();}
             }
         }
-    

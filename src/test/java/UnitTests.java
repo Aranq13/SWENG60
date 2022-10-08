@@ -36,32 +36,32 @@ public class UnitTests {
     
     @Test
     /**
-     * Tests that the parse method will return the correct result for equations with a single operator
+     * Tests that the evaluate method will return the correct result for equations with a single operator
      * Subtraction not working on main branch
      */
     public void singleTest() {
         myCalculator calculator = new myCalculator();
 
-        assertEquals(0, calculator.parse("0"));
-        assertEquals(55, calculator.parse("5+50"));
-        //assertEquals(23, calculator.parse("30-7"));
-        assertEquals(39, calculator.parse("13*3"));
+        assertEquals(0, calculator.evaluate("0"));
+        assertEquals(55, calculator.evaluate("5+50"));
+        //assertEquals(23, calculator.evaluate("30-7"));
+        assertEquals(39, calculator.evaluate("13*3"));
     }
 
     
     /**
-     * Tests that the parse method will return the correct result for equations featuring negative numbers
+     * Tests that the evaluate method will return the correct result for equations featuring negative numbers
      * Failure on main branch (bugged)
      */
     public void negativeNumbersTest() {
         myCalculator calculator = new myCalculator();
 
-        assertEquals(-5, calculator.parse("-5"));
-        assertEquals(40, calculator.parse("50+-10"));
-        assertEquals(-27, calculator.parse("-30+3"));
-        assertEquals(12, calculator.parse("6--6"));
-        assertEquals(0, calculator.parse("-6--6"));
-        assertEquals(-35, calculator.parse("5*-7"));
+        assertEquals(-5, calculator.evaluate("-5"));
+        assertEquals(40, calculator.evaluate("50+-10"));
+        assertEquals(-27, calculator.evaluate("-30+3"));
+        assertEquals(12, calculator.evaluate("6--6"));
+        assertEquals(0, calculator.evaluate("-6--6"));
+        assertEquals(-35, calculator.evaluate("5*-7"));
     }
 
     
@@ -72,13 +72,13 @@ public class UnitTests {
     public void oopTest() {
         myCalculator calculator = new myCalculator();
 
-        assertEquals(15, calculator.parse("5+5+5"));
-        assertEquals(19, calculator.parse("10+4*2+1"));
-        assertEquals(-50, calculator.parse("5-5--5*10"));
-        assertEquals(67, calculator.parse("85-9*2"));
-        assertEquals(30, calculator.parse("3*3*3+3"));
-        assertEquals(72, calculator.parse("-24--24--24--24"));
-        assertEquals(72, calculator.parse("-24--24*3"));
+        assertEquals(15, calculator.evaluate("5+5+5"));
+        assertEquals(19, calculator.evaluate("10+4*2+1"));
+        assertEquals(-50, calculator.evaluate("5-5--5*10"));
+        assertEquals(67, calculator.evaluate("85-9*2"));
+        assertEquals(30, calculator.evaluate("3*3*3+3"));
+        assertEquals(72, calculator.evaluate("-24--24--24--24"));
+        assertEquals(72, calculator.evaluate("-24--24*3"));
     }
 
 }
