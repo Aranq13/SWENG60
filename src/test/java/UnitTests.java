@@ -12,9 +12,8 @@ public class UnitTests {
     @Test
     /**
      * Tests that valid strings are accepted and invalid strings are rejected.
-     * stringAcceptor not yet implemented on main branch
      */
-     
+
     public void acceptorTest() {
         assertFalse(myCalculator.stringAcceptor(null));
         assertFalse(myCalculator.stringAcceptor(""));
@@ -76,7 +75,6 @@ public class UnitTests {
     @Test
     /**
      * Tests that the evaluate method will return the correct result for equations featuring negative numbers
-     * Failure on main branch (bugged)
      */
     public void negativeNumbersTest() {
         assertEquals(-5, myCalculator.evaluate("-5"));
@@ -90,17 +88,28 @@ public class UnitTests {
     @Test
     /**
      * Tests that the calculator will give the correct results for equations with order of operations
-     * Failure on main branch (oop not yet implemented)
      */
     public void oopTest() {
         assertEquals(15, myCalculator.evaluate("5+5+5"));
         assertEquals(19, myCalculator.evaluate("10+4*2+1"));
-        assertEquals(-50, myCalculator.evaluate("5-5--5*10"));
+        assertEquals(42, myCalculator.evaluate("10*4+2*1"));
+        assertEquals(50, myCalculator.evaluate("5-5--5*10"));
         assertEquals(67, myCalculator.evaluate("85-9*2"));
         assertEquals(30, myCalculator.evaluate("3*3*3+3"));
-        assertEquals(72, myCalculator.evaluate("-24--24--24--24"));
-        assertEquals(72, myCalculator.evaluate("-24--24*3"));
+        assertEquals(72, myCalculator.evaluate("-24--24--24--24--24"));
+        assertEquals(72, myCalculator.evaluate("-24--24*4"));
     }
+
+    @Test
+    /**
+     * Final test
+     * A very long equation to make sure calculator works perfectly
+     */
+    public void complexTest() {
+        assertEquals(1682, myCalculator.evaluate("-5+3*7*7*7-5+6*-5*-4+-307+25*35--5*-5"));
+    }
+
+
 
 }
 

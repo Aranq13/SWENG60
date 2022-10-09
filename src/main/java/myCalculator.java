@@ -17,6 +17,7 @@ public class myCalculator {
         }
         return -1;
     }
+
     public static boolean stringAcceptor(String input) {
         if (input == null || input.length() == 0) return false;
         int first = 0;
@@ -27,17 +28,16 @@ public class myCalculator {
             return false;
         }
         first++;
-        if ((input.charAt(input.length()-1) < '0') | (input.charAt(input.length()-1) > '9')) {
+        if ((input.charAt(input.length() - 1) < '0') | (input.charAt(input.length() - 1) > '9')) {
             return false;
         }
         boolean prevOperator = false;
         for (int i = first; i < input.length(); i++) {
             char next = input.charAt(i);
             if (next == '+' || next == '-' || next == '*') {
-                if (prevOperator && next!='-') return false;
+                if (prevOperator && next != '-') return false;
                 else prevOperator = true;
-            }
-            else if ( next > '9' || next < '0') {
+            } else if (next > '9' || next < '0') {
                 return false;
             } else prevOperator = false;
         }
@@ -50,13 +50,13 @@ public class myCalculator {
         int x, y;
         // if(operators.size() >= 2) {
         char operator = operators.pop();
-        switch(operator) {
+        switch (operator) {
             case '+':
                 x = operand.pop();
                 y = operand.pop();
                 return x + y;
             case '-':
-                if(operand.size() == 1) {
+                if (operand.size() == 1) {
                     x = operand.pop();
                     return -x;
                 } else
@@ -78,15 +78,15 @@ public class myCalculator {
     public static int evaluate(String input) {
         boolean isNegative = input.charAt(0) == '-';
         boolean prevOperator = true;
-        input = input.replaceAll("\\s+",""); // remove whitespace (if any)
-        Stack<Integer> operand = new Stack<Integer>(); // stack for operands
-        Stack<Character> operator = new Stack<Character>(); // stack for operators
+        input = input.replaceAll("\\s+", ""); // remove whitespace (if any)
+        Stack<Integer> operand = new Stack<>(); // stack for operands
+        Stack<Character> operator = new Stack<>(); // stack for operators
         for (int i = 0; i < input.length(); i++) {
             char k = input.charAt(i); // element position
             if (Character.isDigit(k)) { // if operand...
                 int number = 0;
                 while (Character.isDigit(k)) {
-                    number = number*10 + (k - '0'); // convert to integer
+                    number = number * 10 + (k - '0'); // convert to integer
                     i++;
                     if (i < input.length()) { // if more than one digit in number
                         k = input.charAt(i);
@@ -95,56 +95,54 @@ public class myCalculator {
                     }
                 }
                 i--;
-                if (isNegative){
+                if (isNegative) {
                     number = -number;
                     isNegative = false;
                 }
-                operand.push(number);	// push numbers onto operand stack
+                operand.push(number);    // push numbers onto operand stack
                 prevOperator = false;
-            } else if (k == '(') {	// push opening bracket to operator stack
+            } else if (k == '(') {    // push opening bracket to operator stack
                 operator.push(k);
-                prevOperator=true;
-            } else if (k == ')') { 	// closing bracket solves equation
-                while(operator.peek()!='(') {
+                prevOperator = true;
+            } else if (k == ')') {    // closing bracket solves equation
+                while (operator.peek() != '(') {
                     int answer = applyOperator(operand, operator);
                     operand.push(answer);
                 }
                 operator.pop();
-            } else if (isOperator(k)) {	// if current k is an operator
-                if (i == 0 || operand.size() == 1) {
-                    if (prevOperator & k == '-'){
-                        isNegative = true;
-                    } else {
-                        operator.push(k);
-                        prevOperator = true;
-                    }
-                } else {
-                    while(operand.size() >= 2 && precedence(k) <= precedence(operator.peek())) { // if precedence is higher...
-                        int out = applyOperator(operand, operator);
-                        operand.push(out);
-                    }
+            } else if (isOperator(k)) {    // if current k is an operator
 
+                if ((i == 0 | prevOperator) & k == '-') {
+                    isNegative = true;
                 }
-            }
-            while (!operator.isEmpty() && !operand.isEmpty() && operand.size() >= 2) { // apply remaining operators to remaining numbers
-                int out = 0;
-                if (operand.size() >= 2 && operator.size() != 0) {
-                    for( i = 0; i < operand.size(); i++) {
-                        out = operand.push(applyOperator(operand, operator));
+                if (!prevOperator) {
+                    if (i != 0 && operand.size() != 1) {
+                        while ((operand.size() >= 2 && precedence(k) <= precedence(operator.peek())) || i + 1 == input.length()) { // if precedence is higher...
+                            int out = applyOperator(operand, operator);
+                            operand.push(out);
+
+                        }
                     }
-                    if(operator.size() != 0)
-                        out = applyOperator(operand, operator);
+                    operator.push(k);
+                    prevOperator = true;
                 }
-                operand.push(out);
-                return operand.pop();
             }
         }
-        return operand.pop();	// return answer on top of stack
+        while (!operator.isEmpty() && !operand.isEmpty() && operand.size() >= 2) { // apply remaining operators to remaining numbers
+            int out = 0;
+            for (int i = 0; i < operand.size(); i++) {
+                out = operand.push(applyOperator(operand, operator));
+            }
+            if (operator.size() != 0)
+                out = applyOperator(operand, operator);
+            operand.push(out);
+        }
+
+        return operand.pop();    // return answer on top of stack
     }
 
 
-
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("Welcome to The String Calculator!\nPlease type exit when ready to exit program.\n\n");
             System.out.println("Please enter your equation: ");
@@ -153,9 +151,15 @@ public class myCalculator {
                 if ("exit".equalsIgnoreCase(equation)) {
                     break;
                 }
-                int answer = evaluate(equation);
-                System.out.println("Answer: " + answer);
+                if (!stringAcceptor(equation)) {
+                    System.out.println("Please enter a valid equation");
+                } else {
+                    int answer = evaluate(equation);
+                    System.out.println("Answer: " + answer);
+                }
             }
-        } catch(java.lang.Exception e) {e.printStackTrace();}
+        } catch (java.lang.Exception e) {
+            e.printStackTrace();
+        }
     }
 }
