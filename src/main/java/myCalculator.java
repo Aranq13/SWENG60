@@ -105,6 +105,9 @@ public class myCalculator {
         	return operand.pop();
         }
         }
+        if (operator.size() == 1 && operand.size() == 1) {
+        	return applyOperator(operand, operator);
+        	}
         return operand.pop();	// return answer on top of stack
     }
 
